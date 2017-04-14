@@ -10,6 +10,52 @@ namespace Project1
     {
         public static void Main(string[] args)
         {
+
+            List<Person> PersonList = new List<Person>();
+            var person1 = new Person();
+            person1.FirstName = "Ana-Maria";
+            person1.LastName = "Ciuhan";
+            person1.Address.Street = "Str. G. Alexandrescu ";
+            person1.Address.Number = 28;
+            person1.Address.City = "Cluj-Napoca";
+            person1.Address.Country = "Romania";
+            person1.Address.PostalCode = "500160";
+
+
+
+            var person2 = new Person();
+            person2.FirstName = "Catalin";
+            person2.LastName = "Viu";
+            person2.Address.Street = "Str. G. Alexandrescu ";
+            person2.Address.Number = 28;
+            person2.Address.City = "Cluj-Napoca";
+            person2.Address.Country = "Romania";
+            person2.Address.PostalCode = "500160";
+
+            List<Company> CompanyList = new List<Company>();
+
+            var company1 = new Company();
+            company1.Name = "Fortech";
+            company1.Address.Street = "Str. Frunzisului";
+            company1.Address.Number = 106;
+            company1.Address.PostalCode = "100200";
+            company1.Address.City = "Cluj-Napoca";
+            company1.Address.Country = "Romania";
+
+            PersonList.Add(person1);
+            PersonList.Add(person2);
+            CompanyList.Add(company1);
+
+            PersonList.ForEach(Console.WriteLine);
+
+            foreach (var item in CompanyList)
+            {
+                Console.WriteLine(item);
+            }
+
+        
+
+
             while (true)
             {
                 Console.WriteLine("Enter your action: + item to add, - item to delete or -- to clear all");

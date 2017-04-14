@@ -152,6 +152,12 @@ namespace Project1
 
        }
 
+        public void DisplayAdress()
+        {
+
+             
+        }
+
 
     }
 }
