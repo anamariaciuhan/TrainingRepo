@@ -14,7 +14,7 @@ namespace Project1
         public Company()
         {
             Address = new Address();
-        }
+        } 
 
         public override string ToString()
         {

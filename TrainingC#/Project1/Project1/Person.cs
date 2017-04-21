@@ -8,14 +8,14 @@ namespace Project1
 {
     class Person
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Address Address { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public Address Address { get; set; } 
 
         public Person()
         {
             Address = new Address();
-        }
+        } 
         public override string ToString()
         {
             return "Name: " + FirstName+" "+LastName + Environment.NewLine+ "Address: " + Address;

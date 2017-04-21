@@ -53,7 +53,24 @@ namespace Project1
                 Console.WriteLine(item);
             }
 
-        
+
+            var student1 = new Student("Ana", "Ciuhan", new DateTime(1994, 11, 29));
+            var student2 = new Student("Maria", "Ciuhan", new DateTime(1993, 11, 24));
+            var student3 = new Student("Ion", "Ionescu", new DateTime(1992, 12, 25));
+
+            var curs1 = new Course("info");
+
+           // curs1.CourseName = "info";
+            curs1.AddStudentToCourse(student1);
+            curs1.AddStudentToCourse(student2);
+            curs1.AddStudentToCourse(student3);
+
+            foreach(var studentName in curs1.GetStudentsNames())
+            {
+                Console.WriteLine(studentName);
+            }
+
+
 
 
             while (true)
