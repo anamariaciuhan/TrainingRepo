@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    class Person
+    public class Person
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public Address Address { get; set; } 
+        public string Occupation { get; set; }
+        public int Age { get; set; }
+        public Address Address { get; set; }
+        
 
         public Person()
         {
@@ -18,8 +21,10 @@ namespace Project1
         } 
         public override string ToString()
         {
-            return "Name: " + FirstName+" "+LastName + Environment.NewLine+ "Address: " + Address;
+            return "Name: " + FirstName + " " + LastName+ Environment.NewLine+ "Address: " + Address;
         }
+
+
 
     }
 }

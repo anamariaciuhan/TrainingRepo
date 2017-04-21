@@ -6,7 +6,28 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    class Order
+    public class Order
     {
+
+        public Order(string orderNumber, DateTime orderDate )
+        {
+            OrderNumber = orderNumber;
+
+        }
+
+       /* public string AddDuplicateOrder(string duplicateOrder)
+        {
+
+            if (duplicateOrder == OrderNumber)
+                OrderNumber = duplicateOrder;
+
+            return duplicateOrder;
+        }*/
+
+        public string OrderNumber { get; set; }
+
+        public DateTime orderDate { get; set; }
+   
+
     }
 }

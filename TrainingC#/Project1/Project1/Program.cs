@@ -9,8 +9,83 @@ namespace Project1
     class Program
     {
         public static void Main(string[] args)
-        {
 
+        {
+            var people = Linq.GenerateListOfPeople();
+
+            IEnumerable<FullName> allFullNames = people.Select(x => new FullName { First = x.FirstName, Last = x.LastName });
+            
+            var allFirstNames = allFullNames.Select(y => y.First).ToList();
+
+            var lastOrDefault = people.LastOrDefault();
+            var firstOrDefacult = people.FirstOrDefault();
+            var first24YearsOld = people.FirstOrDefault(a => a.Age == 24); // sau var 2: first24YearsOld=people.Where(a => a.Age ==24).FirstOrDefault();
+            var singleorDefault = people.SingleOrDefault(b => b.FirstName == "Samantha");
+            int countPeople24YearsOld = people.Count(a => a.Age == 24);
+            bool checkList = people.Any();
+
+            var devsOlderThan24 = people.Where(x => x.Occupation == "Dev" && x.Age > 24).ToList();
+
+
+            foreach (var fullName in allFullNames)
+            {
+                Console.WriteLine($"{fullName.Last}, {fullName.First}");
+            }
+
+            Console.WriteLine();
+            foreach(var firstname in allFirstNames)
+            {
+                Console.WriteLine(firstname);
+            }
+
+            Console.WriteLine(Environment.NewLine+lastOrDefault);
+            Console.WriteLine(Environment.NewLine+firstOrDefacult);
+            Console.WriteLine(first24YearsOld.FirstName);
+            Console.WriteLine("SingleOrDefault result: "+singleorDefault);
+            Console.WriteLine(Environment.NewLine+countPeople24YearsOld+" people are 24 years old");
+            Console.WriteLine(Environment.NewLine+checkList+" the list is populated ");
+
+            foreach (var dev in devsOlderThan24)
+            {
+                Console.WriteLine(Environment.NewLine + dev);
+
+            }
+
+            Console.WriteLine();
+            var customer1 = new Customer() { Name = "Vlad" };
+            customer1.AddOrder(new Order("123", new DateTime(2007, 2, 3)));
+            customer1.AddOrder(new Order("234", new DateTime(2007, 3, 6)));
+            customer1.AddOrder(new Order("345", new DateTime(2007, 4, 5)));
+
+            var customer2 = new Customer() { Name = "Mihai" };
+            customer2.AddOrder(new Order(null, new DateTime(2007, 2, 3)));
+            customer2.AddOrder(new Order("200", new DateTime(2007,7,3)));
+            customer2.AddOrder(new Order("300", new DateTime(2007, 8, 9)));
+            customer2.AddOrder(new Order("300", new DateTime(2007, 10, 9)));
+
+
+            var customerList = new List<Customer>();
+            customerList.Add(customer1);
+            customerList.Add(customer2);
+
+           foreach(var customer in customerList)
+            {
+                Console.WriteLine(customer.Name);
+                Console.WriteLine("Orders: ");
+
+                foreach(var order in customer.GetCustomerOrders() )
+                {
+
+                    Console.WriteLine(order);
+                    
+                }
+            }
+
+            Console.WriteLine($"Customer 1 Order Count: {customer1.Orders.Count}");
+            Console.WriteLine($"Customer 2 Order Count: {customer2.Orders.Count}");
+
+
+            Console.WriteLine();
             List<Person> PersonList = new List<Person>();
             var person1 = new Person();
             person1.FirstName = "Ana-Maria";
