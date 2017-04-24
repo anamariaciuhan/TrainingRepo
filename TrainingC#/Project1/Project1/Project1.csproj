@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,9 +48,13 @@
     <Compile Include="Company.cs" />
     <Compile Include="Course.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="ExercitiiExceptions.cs" />
     <Compile Include="Linq.cs" />
     <Compile Include="ListsLesson.cs" />
     <Compile Include="MethodsLesson.cs" />
+    <Compile Include="MyInvalidTokenException.cs" />
+    <Compile Include="MyMissingTokenException.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Person_v2.cs" />

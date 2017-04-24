@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project1
+{
+    public class MyInvalidTokenException:ArgumentException
+
+    {
+        public List<string> TokenList = new List<string>();
+
+        public MyInvalidTokenException(string message) : base(message)
+        {
+        }
+
+     
+
+    }
+}

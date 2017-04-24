@@ -10,7 +10,79 @@ namespace Project1
     {
         public static void Main(string[] args)
 
+
         {
+
+
+            string[] list = new string[5];
+            list[0] = "Sunday";
+            list[1] = "Monday";
+            list[2] = "Tuesday";
+            list[3] = "Wednesday";
+            list[4] = "Thursday";
+
+            for (int i = 0; i <= 5; i++)
+            {
+                try
+                {
+
+                    if (i < 5)
+
+                        Console.WriteLine(list[i].ToString());
+
+                    else throw (new IndexOutOfRangeException(" Index out of range"));
+                    
+                }
+
+                catch (IndexOutOfRangeException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+        
+
+
+
+
+
+            try
+            {
+
+                var token1 = new Exceptions();
+                var token2 = new Exceptions();
+
+
+                token1.GetAccessPermissions("anamaria");
+                token2.GetAccessPermissions("ciuhan");
+
+       
+                         
+            }
+         
+            catch (MyMissingTokenException ex)
+            {
+                Console.WriteLine("This is an ArgumentNullException  "+ ex.Message);
+            }
+            catch(MyInvalidTokenException ex)
+            {
+                Console.WriteLine("This ia an ArgumentOutofRangeException  "+ex.Message );
+            }
+
+
+
+            try
+            {
+                int x = int.Parse(Console.ReadLine());
+            }
+            catch (System.FormatException ex)
+            {
+                // do something here before re-throwing
+                throw ex;
+            }
+
+
+
             var people = Linq.GenerateListOfPeople();
 
             IEnumerable<FullName> allFullNames = people.Select(x => new FullName { First = x.FirstName, Last = x.LastName });
@@ -50,6 +122,7 @@ namespace Project1
                 Console.WriteLine(Environment.NewLine + dev);
 
             }
+          
 
             Console.WriteLine();
             var customer1 = new Customer() { Name = "Vlad" };
@@ -58,24 +131,29 @@ namespace Project1
             customer1.AddOrder(new Order("345", new DateTime(2007, 4, 5)));
 
             var customer2 = new Customer() { Name = "Mihai" };
-            customer2.AddOrder(new Order(null, new DateTime(2007, 2, 3)));
+            customer2.AddOrder(new Order(null, new DateTime(2007, 6, 3)));
             customer2.AddOrder(new Order("200", new DateTime(2007,7,3)));
-            customer2.AddOrder(new Order("300", new DateTime(2007, 8, 9)));
-            customer2.AddOrder(new Order("300", new DateTime(2007, 10, 9)));
+            customer2.AddOrder(new Order("300", new DateTime(2000, 8, 9)));
+            customer2.AddOrder(new Order("300", new DateTime(2018, 10, 9)));
 
 
             var customerList = new List<Customer>();
             customerList.Add(customer1);
             customerList.Add(customer2);
 
+          
+
            foreach(var customer in customerList)
             {
                 Console.WriteLine(customer.Name);
                 Console.WriteLine("Orders: ");
 
-                foreach(var order in customer.GetCustomerOrders() )
-                {
+                var custOrders = customer.GetCustomerOrders();
 
+                foreach(var order in custOrders )
+                {
+                    
+                    
                     Console.WriteLine(order);
                     
                 }

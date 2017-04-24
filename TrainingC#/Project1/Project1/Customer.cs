@@ -24,33 +24,27 @@ namespace Project1
 
 
         }
-    
 
-        // Customers expose a method for adding an Order
 
         
-        
+
+      //  var distinct = Orders.GroupBy(x => x.OrderNumber).Select(y => y.First()).ToList();
+
         public void  AddOrder(Order order)
         {
-            /* foreach (Order item in Orders)
-
-             {
-                 if (!Orders.Contains(order))
-
-                     Orders.Add(order);
-             } */
-             
-
             Orders.Add(order);
+            
         }
 
+        
            
         
 
         public List<string> GetCustomerOrders()
         {
+            // Trying to add an Order with an existing OrderNumber should replace the existing Order (not add a duplicate)
 
-            var CustomerOrders = Orders.Select(o => o.OrderNumber+" :  "+o.orderDate).ToList();
+            var CustomerOrders = Orders.Select(o => o.OrderNumber+" :  "+o.OrderDate).Distinct().ToList();
 
             return CustomerOrders;
         }

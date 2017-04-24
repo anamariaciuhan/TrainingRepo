@@ -12,22 +12,17 @@ namespace Project1
         public Order(string orderNumber, DateTime orderDate )
         {
             OrderNumber = orderNumber;
+            this.OrderDate = orderDate;
 
         }
 
-       /* public string AddDuplicateOrder(string duplicateOrder)
-        {
-
-            if (duplicateOrder == OrderNumber)
-                OrderNumber = duplicateOrder;
-
-            return duplicateOrder;
-        }*/
+     
 
         public string OrderNumber { get; set; }
 
-        public DateTime orderDate { get; set; }
+        public DateTime OrderDate { get; set; }
    
+       
 
     }
 }
