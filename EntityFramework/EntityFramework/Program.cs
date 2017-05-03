@@ -13,17 +13,22 @@ namespace EntityFramework
         {
 
             Student newStud = new Student() { StudentName = "New Student" };
-             
 
+            newStud.Standard = new Standard() { StandardName = "Standard nou" };
+            newStud.StudentCourses.Add(new StudentCourse() { StudentCourseId = 22, CourseId = 6 });
+           
 
             using (var context = new SchoolDBEntities())
             {
+
 
                 var studentList = context.Students.ToList();
 
                 context.Students.Add(newStud);
                 // context.Standards.Add(new Standard() { StandardID = 5 });
-
+                Console.WriteLine("New Student Entity has been added with new StudentId= " + newStud.StudentId.ToString());
+                Console.WriteLine("New Standard Entity has been added with new StandardId= " + newStud.StandardId.ToString());
+                Console.WriteLine("New Course Entity has been added with new CourseId= " + newStud.StudentCourses.ElementAt(0).CourseId.ToString());
 
                 var studentEntry = context.Entry(newStud);
                 Console.WriteLine("Student EntityState: {0}", studentEntry.State);
