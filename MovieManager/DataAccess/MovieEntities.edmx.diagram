@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e8ef1c1ab7c84924b58bac26471c84ba" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="MovieManagerModel.Actor" Width="1.5" PointX="3.875" PointY="0.625" />
+        <EntityTypeShape EntityType="MovieManagerModel.Cast" Width="1.5" PointX="6.125" PointY="2.625" />
+        <EntityTypeShape EntityType="MovieManagerModel.Genre" Width="1.5" PointX="0.875" PointY="4.875" />
+        <EntityTypeShape EntityType="MovieManagerModel.Login" Width="1.5" PointX="8.625" PointY="1.75" />
+        <EntityTypeShape EntityType="MovieManagerModel.Movie" Width="1.5" PointX="3.875" PointY="3.875" />
+        <EntityTypeShape EntityType="MovieManagerModel.Watched" Width="1.5" PointX="7.125" PointY="7.75" />
+        <EntityTypeShape EntityType="MovieManagerModel.WatchList" Width="1.5" PointX="9.375" PointY="5.5" />
+        <AssociationConnector Association="MovieManagerModel.FK__Cast__ActorId__7849DB76" />
+        <AssociationConnector Association="MovieManagerModel.FK__Cast__MovieId__793DFFAF" />
+        <AssociationConnector Association="MovieManagerModel.FK__Movie__GenreId__756D6ECB" />
+        <AssociationConnector Association="MovieManagerModel.FK__Watched__MovieId__7C1A6C5A" />
+        <AssociationConnector Association="MovieManagerModel.FK__WatchList__Movie__7EF6D905" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

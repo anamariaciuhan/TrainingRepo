@@ -1,0 +1,9 @@
+D:\Projects\MovieManager\DataAccess\bin\Debug\DataAccess.dll.config
+D:\Projects\MovieManager\DataAccess\bin\Debug\DataAccess.dll
+D:\Projects\MovieManager\DataAccess\bin\Debug\DataAccess.pdb
+D:\Projects\MovieManager\DataAccess\bin\Debug\EntityFramework.dll
+D:\Projects\MovieManager\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\MovieManager\DataAccess\bin\Debug\EntityFramework.xml
+D:\Projects\MovieManager\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\MovieManager\DataAccess\obj\Debug\DataAccess.dll
+D:\Projects\MovieManager\DataAccess\obj\Debug\DataAccess.pdb

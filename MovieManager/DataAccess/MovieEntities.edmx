@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MovieManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="char" MaxLength="10" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <EntityType Name="Cast">
+          <Key>
+            <PropertyRef Name="CastId" />
+          </Key>
+          <Property Name="CastId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActorId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenreType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Rating" Type="float" />
+          <Property Name="Year" Type="date" />
+          <Property Name="Producer" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Seasons" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="GenreId" Type="int" />
+        </EntityType>
+        <EntityType Name="Watched">
+          <Key>
+            <PropertyRef Name="WatchedId" />
+          </Key>
+          <Property Name="WatchedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Favourite" Type="bit" />
+        </EntityType>
+        <EntityType Name="WatchList">
+          <Key>
+            <PropertyRef Name="WatchListId" />
+          </Key>
+          <Property Name="WatchListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Cast__ActorId__0880433F">
+          <End Role="Actor" Type="Self.Actor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cast" Type="Self.Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actor">
+              <PropertyRef Name="ActorId" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="ActorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cast__MovieId__09746778">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cast" Type="Self.Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__GenreId__05A3D694">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watched__MovieId__0C50D423">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Watched" Type="Self.Watched" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Watched">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WatchList__Movie__0F2D40CE">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="WatchList" Type="Self.WatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="WatchList">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MovieManagerModelStoreContainer">
+          <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cast" EntityType="Self.Cast" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Watched" EntityType="Self.Watched" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WatchList" EntityType="Self.WatchList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cast__ActorId__0880433F" Association="Self.FK__Cast__ActorId__0880433F">
+            <End Role="Actor" EntitySet="Actor" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cast__MovieId__09746778" Association="Self.FK__Cast__MovieId__09746778">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__GenreId__05A3D694" Association="Self.FK__Movie__GenreId__05A3D694">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watched__MovieId__0C50D423" Association="Self.FK__Watched__MovieId__0C50D423">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Watched" EntitySet="Watched" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WatchList__Movie__0F2D40CE" Association="Self.FK__WatchList__Movie__0F2D40CE">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="WatchList" EntitySet="WatchList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MovieManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actor" EntityType="MovieManagerModel.Actor" />
+          <EntitySet Name="Cast" EntityType="MovieManagerModel.Cast" />
+          <EntitySet Name="Genre" EntityType="MovieManagerModel.Genre" />
+          <EntitySet Name="Login" EntityType="MovieManagerModel.Login" />
+          <EntitySet Name="Movie" EntityType="MovieManagerModel.Movie" />
+          <EntitySet Name="Watched" EntityType="MovieManagerModel.Watched" />
+          <EntitySet Name="WatchList" EntityType="MovieManagerModel.WatchList" />
+          <AssociationSet Name="FK__Cast__ActorId__7849DB76" Association="MovieManagerModel.FK__Cast__ActorId__7849DB76">
+            <End Role="Actor" EntitySet="Actor" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cast__MovieId__793DFFAF" Association="MovieManagerModel.FK__Cast__MovieId__793DFFAF">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Cast" EntitySet="Cast" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__GenreId__756D6ECB" Association="MovieManagerModel.FK__Movie__GenreId__756D6ECB">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Watched__MovieId__7C1A6C5A" Association="MovieManagerModel.FK__Watched__MovieId__7C1A6C5A">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Watched" EntitySet="Watched" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WatchList__Movie__7EF6D905" Association="MovieManagerModel.FK__WatchList__Movie__7EF6D905">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="WatchList" EntitySet="WatchList" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <NavigationProperty Name="Cast" Relationship="MovieManagerModel.FK__Cast__ActorId__7849DB76" FromRole="Actor" ToRole="Cast" />
+        </EntityType>
+        <EntityType Name="Cast">
+          <Key>
+            <PropertyRef Name="CastId" />
+          </Key>
+          <Property Name="CastId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActorId" Type="Int32" Nullable="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Actor" Relationship="MovieManagerModel.FK__Cast__ActorId__7849DB76" FromRole="Cast" ToRole="Actor" />
+          <NavigationProperty Name="Movie" Relationship="MovieManagerModel.FK__Cast__MovieId__793DFFAF" FromRole="Cast" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenreType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movie" Relationship="MovieManagerModel.FK__Movie__GenreId__756D6ECB" FromRole="Genre" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Double" />
+          <Property Name="Year" Type="DateTime" Precision="0" />
+          <Property Name="Producer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Seasons" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GenreId" Type="Int32" />
+          <NavigationProperty Name="Cast" Relationship="MovieManagerModel.FK__Cast__MovieId__793DFFAF" FromRole="Movie" ToRole="Cast" />
+          <NavigationProperty Name="Genre" Relationship="MovieManagerModel.FK__Movie__GenreId__756D6ECB" FromRole="Movie" ToRole="Genre" />
+          <NavigationProperty Name="Watched" Relationship="MovieManagerModel.FK__Watched__MovieId__7C1A6C5A" FromRole="Movie" ToRole="Watched" />
+          <NavigationProperty Name="WatchList" Relationship="MovieManagerModel.FK__WatchList__Movie__7EF6D905" FromRole="Movie" ToRole="WatchList" />
+        </EntityType>
+        <EntityType Name="Watched">
+          <Key>
+            <PropertyRef Name="WatchedId" />
+          </Key>
+          <Property Name="WatchedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Favourite" Type="Boolean" />
+          <NavigationProperty Name="Movie" Relationship="MovieManagerModel.FK__Watched__MovieId__7C1A6C5A" FromRole="Watched" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="WatchList">
+          <Key>
+            <PropertyRef Name="WatchListId" />
+          </Key>
+          <Property Name="WatchListId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Movie" Relationship="MovieManagerModel.FK__WatchList__Movie__7EF6D905" FromRole="WatchList" ToRole="Movie" />
+        </EntityType>
+        <Association Name="FK__Cast__ActorId__7849DB76">
+          <End Type="MovieManagerModel.Actor" Role="Actor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieManagerModel.Cast" Role="Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actor">
+              <PropertyRef Name="ActorId" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="ActorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cast__MovieId__793DFFAF">
+          <End Type="MovieManagerModel.Movie" Role="Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieManagerModel.Cast" Role="Cast" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Cast">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__GenreId__756D6ECB">
+          <End Type="MovieManagerModel.Genre" Role="Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieManagerModel.Movie" Role="Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Watched__MovieId__7C1A6C5A">
+          <End Type="MovieManagerModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="MovieManagerModel.Watched" Role="Watched" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="Watched">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WatchList__Movie__7EF6D905">
+          <End Type="MovieManagerModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="MovieManagerModel.WatchList" Role="WatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="MovieId" />
+            </Principal>
+            <Dependent Role="WatchList">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieManagerModelStoreContainer" CdmEntityContainer="MovieManagerEntities">
+          <EntitySetMapping Name="Actor">
+            <EntityTypeMapping TypeName="MovieManagerModel.Actor">
+              <MappingFragment StoreEntitySet="Actor">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cast">
+            <EntityTypeMapping TypeName="MovieManagerModel.Cast">
+              <MappingFragment StoreEntitySet="Cast">
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+                <ScalarProperty Name="CastId" ColumnName="CastId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genre">
+            <EntityTypeMapping TypeName="MovieManagerModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="GenreType" ColumnName="GenreType" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="MovieManagerModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="MovieManagerModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Seasons" ColumnName="Seasons" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Producer" ColumnName="Producer" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Watched">
+            <EntityTypeMapping TypeName="MovieManagerModel.Watched">
+              <MappingFragment StoreEntitySet="Watched">
+                <ScalarProperty Name="Favourite" ColumnName="Favourite" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="WatchedId" ColumnName="WatchedId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WatchList">
+            <EntityTypeMapping TypeName="MovieManagerModel.WatchList">
+              <MappingFragment StoreEntitySet="WatchList">
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="WatchListId" ColumnName="WatchListId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
