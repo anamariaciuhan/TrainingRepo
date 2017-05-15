@@ -25,7 +25,7 @@ namespace DataAccess
         public int MovieId { get; set; }
         public string Title { get; set; }
         public Nullable<double> Rating { get; set; }
-        public Nullable<System.DateTime> Year { get; set; }
+        public System.DateTime Year { get; set; }
         public string Producer { get; set; }
         public string Description { get; set; }
         public Nullable<int> Seasons { get; set; }

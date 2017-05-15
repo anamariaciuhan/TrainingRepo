@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess;
+using System;
 using System.Collections.Specialized;
 
 namespace MovieManager
@@ -15,11 +16,10 @@ namespace MovieManager
 
         public string Producer { get; set; }
 
-       // public string GenreType { get; set; }
 
         //public string Test { get; set; }
 
-        public DateTime? Year { get; set; }
+        public DateTime Year { get; set; }
         public string Description { get;  set; }
         
           
@@ -29,7 +29,7 @@ namespace MovieManager
         
         public bool Watched { get; set; }
         public bool WatchList { get; set; }
-
+      // public string GenreType { get; internal set; }
     }
     
 }

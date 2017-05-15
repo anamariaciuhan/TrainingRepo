@@ -37,10 +37,10 @@
       <PropertyRef Name="MovieId" />
     </Key>
     <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Rating" Type="float" />
-    <Property Name="Year" Type="date" />
-    <Property Name="Producer" Type="varchar" MaxLength="50" />
+    <Property Name="Year" Type="date" Nullable="false" />
+    <Property Name="Producer" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="50" />
     <Property Name="Seasons" Type="int" />
     <Property Name="Status" Type="varchar" MaxLength="50" />
@@ -61,7 +61,7 @@
     <Property Name="WatchListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MovieId" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Cast__ActorId__0880433F">
+  <Association Name="FK__Cast__ActorId__4830B400">
     <End Role="Actor" Type="Self.Actor" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -75,7 +75,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Cast__MovieId__09746778">
+  <Association Name="FK__Cast__MovieId__4924D839">
     <End Role="Movie" Type="Self.Movie" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -89,7 +89,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Movie__GenreId__05A3D694">
+  <Association Name="FK__Movie__GenreId__3F9B6DFF">
     <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
@@ -103,7 +103,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Watched__MovieId__0C50D423">
+  <Association Name="FK__Watched__MovieId__4277DAAA">
     <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
     <End Role="Watched" Type="Self.Watched" Multiplicity="*" />
     <ReferentialConstraint>
@@ -115,7 +115,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__WatchList__Movie__0F2D40CE">
+  <Association Name="FK__WatchList__Movie__45544755">
     <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
     <End Role="WatchList" Type="Self.WatchList" Multiplicity="*" />
     <ReferentialConstraint>
@@ -135,23 +135,23 @@
     <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Watched" EntityType="Self.Watched" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WatchList" EntityType="Self.WatchList" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Cast__ActorId__0880433F" Association="Self.FK__Cast__ActorId__0880433F">
+    <AssociationSet Name="FK__Cast__ActorId__4830B400" Association="Self.FK__Cast__ActorId__4830B400">
       <End Role="Actor" EntitySet="Actor" />
       <End Role="Cast" EntitySet="Cast" />
     </AssociationSet>
-    <AssociationSet Name="FK__Cast__MovieId__09746778" Association="Self.FK__Cast__MovieId__09746778">
+    <AssociationSet Name="FK__Cast__MovieId__4924D839" Association="Self.FK__Cast__MovieId__4924D839">
       <End Role="Movie" EntitySet="Movie" />
       <End Role="Cast" EntitySet="Cast" />
     </AssociationSet>
-    <AssociationSet Name="FK__Movie__GenreId__05A3D694" Association="Self.FK__Movie__GenreId__05A3D694">
+    <AssociationSet Name="FK__Movie__GenreId__3F9B6DFF" Association="Self.FK__Movie__GenreId__3F9B6DFF">
       <End Role="Genre" EntitySet="Genre" />
       <End Role="Movie" EntitySet="Movie" />
     </AssociationSet>
-    <AssociationSet Name="FK__Watched__MovieId__0C50D423" Association="Self.FK__Watched__MovieId__0C50D423">
+    <AssociationSet Name="FK__Watched__MovieId__4277DAAA" Association="Self.FK__Watched__MovieId__4277DAAA">
       <End Role="Movie" EntitySet="Movie" />
       <End Role="Watched" EntitySet="Watched" />
     </AssociationSet>
-    <AssociationSet Name="FK__WatchList__Movie__0F2D40CE" Association="Self.FK__WatchList__Movie__0F2D40CE">
+    <AssociationSet Name="FK__WatchList__Movie__45544755" Association="Self.FK__WatchList__Movie__45544755">
       <End Role="Movie" EntitySet="Movie" />
       <End Role="WatchList" EntitySet="WatchList" />
     </AssociationSet>

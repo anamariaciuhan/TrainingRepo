@@ -47,6 +47,7 @@
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWatched = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colWatchList = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Producer = new DevExpress.XtraGrid.Columns.GridColumn();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.gridWatchList = new DevExpress.XtraGrid.GridControl();
             this.watchListGridViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -84,6 +85,9 @@
             this.buttonRefreshWatched = new System.Windows.Forms.Button();
             this.buttonDeleteWatched = new System.Windows.Forms.Button();
             this.tabNavigationPage3 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.panelControlWatchList = new DevExpress.XtraEditors.PanelControl();
+            this.buttonRefreshWatchList = new System.Windows.Forms.Button();
+            this.buttonDeleteWatchList = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.movieGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieGridViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -105,11 +109,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControlWatched)).BeginInit();
             this.panelControlWatched.SuspendLayout();
             this.tabNavigationPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControlWatchList)).BeginInit();
+            this.panelControlWatchList.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(271, 34);
+            this.buttonAdd.Location = new System.Drawing.Point(282, 34);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 1;
@@ -119,7 +125,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(90, 34);
+            this.buttonSave.Location = new System.Drawing.Point(97, 34);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 2;
@@ -136,7 +142,7 @@
             this.movieGrid.Name = "movieGrid";
             this.movieGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1});
-            this.movieGrid.Size = new System.Drawing.Size(1362, 654);
+            this.movieGrid.Size = new System.Drawing.Size(1432, 655);
             this.movieGrid.TabIndex = 3;
             this.movieGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -159,7 +165,8 @@
             this.colSeasons,
             this.colStatus,
             this.colWatched,
-            this.colWatchList});
+            this.colWatchList,
+            this.Producer});
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFullFocus;
             this.gridView1.GridControl = this.movieGrid;
             this.gridView1.Name = "gridView1";
@@ -192,13 +199,14 @@
             this.colGenreType.FieldName = "GenreType";
             this.colGenreType.Name = "colGenreType";
             this.colGenreType.Visible = true;
-            this.colGenreType.VisibleIndex = 3;
+            this.colGenreType.VisibleIndex = 4;
             // 
             // repositoryItemComboBox1
             // 
             this.repositoryItemComboBox1.AutoHeight = false;
             this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
             // colTest
@@ -211,46 +219,53 @@
             this.colYear.FieldName = "Year";
             this.colYear.Name = "colYear";
             this.colYear.Visible = true;
-            this.colYear.VisibleIndex = 4;
+            this.colYear.VisibleIndex = 5;
             // 
             // colDescription
             // 
             this.colDescription.FieldName = "Description";
             this.colDescription.Name = "colDescription";
             this.colDescription.Visible = true;
-            this.colDescription.VisibleIndex = 5;
+            this.colDescription.VisibleIndex = 6;
             // 
             // colSeasons
             // 
             this.colSeasons.FieldName = "Seasons";
             this.colSeasons.Name = "colSeasons";
             this.colSeasons.Visible = true;
-            this.colSeasons.VisibleIndex = 6;
+            this.colSeasons.VisibleIndex = 7;
             // 
             // colStatus
             // 
             this.colStatus.FieldName = "Status";
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 7;
+            this.colStatus.VisibleIndex = 8;
             // 
             // colWatched
             // 
             this.colWatched.FieldName = "Watched";
             this.colWatched.Name = "colWatched";
             this.colWatched.Visible = true;
-            this.colWatched.VisibleIndex = 8;
+            this.colWatched.VisibleIndex = 9;
             // 
             // colWatchList
             // 
             this.colWatchList.FieldName = "WatchList";
             this.colWatchList.Name = "colWatchList";
             this.colWatchList.Visible = true;
-            this.colWatchList.VisibleIndex = 9;
+            this.colWatchList.VisibleIndex = 10;
+            // 
+            // Producer
+            // 
+            this.Producer.FieldName = "Producer";
+            this.Producer.Name = "Producer";
+            this.Producer.Visible = true;
+            this.Producer.VisibleIndex = 3;
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Location = new System.Drawing.Point(559, 34);
+            this.buttonRefresh.Location = new System.Drawing.Point(628, 34);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
             this.buttonRefresh.TabIndex = 5;
@@ -261,11 +276,10 @@
             // gridWatchList
             // 
             this.gridWatchList.DataSource = this.watchListGridViewModelBindingSource;
-            this.gridWatchList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridWatchList.Location = new System.Drawing.Point(0, 0);
             this.gridWatchList.MainView = this.gridViewWatchList;
             this.gridWatchList.Name = "gridWatchList";
-            this.gridWatchList.Size = new System.Drawing.Size(1362, 654);
+            this.gridWatchList.Size = new System.Drawing.Size(1432, 655);
             this.gridWatchList.TabIndex = 7;
             this.gridWatchList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewWatchList});
@@ -374,11 +388,10 @@
             // gridWatched
             // 
             this.gridWatched.DataSource = this.watchedGridViewModelBindingSource1;
-            this.gridWatched.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridWatched.Location = new System.Drawing.Point(0, 0);
             this.gridWatched.MainView = this.gridViewWatched;
             this.gridWatched.Name = "gridWatched";
-            this.gridWatched.Size = new System.Drawing.Size(1362, 654);
+            this.gridWatched.Size = new System.Drawing.Size(1432, 655);
             this.gridWatched.TabIndex = 8;
             this.gridWatched.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewWatched});
@@ -503,11 +516,11 @@
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(411, 34);
+            this.buttonRemove.Location = new System.Drawing.Point(448, 34);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonRemove.TabIndex = 4;
-            this.buttonRemove.Text = "Remove";
+            this.buttonRemove.Text = "Delete";
             this.buttonRemove.UseVisualStyleBackColor = true;
             this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
@@ -525,9 +538,9 @@
             this.Movies,
             this.tabNavigationPage2,
             this.tabNavigationPage3});
-            this.tabPane1.RegularSize = new System.Drawing.Size(1380, 718);
+            this.tabPane1.RegularSize = new System.Drawing.Size(1450, 719);
             this.tabPane1.SelectedPage = this.Movies;
-            this.tabPane1.Size = new System.Drawing.Size(1380, 718);
+            this.tabPane1.Size = new System.Drawing.Size(1450, 719);
             this.tabPane1.TabIndex = 9;
             this.tabPane1.Text = "tabPane1";
             this.tabPane1.Click += new System.EventHandler(this.tabPane1_Click);
@@ -543,7 +556,7 @@
             this.Movies.Controls.Add(this.movieGrid);
             this.Movies.Image = ((System.Drawing.Image)(resources.GetObject("Movies.Image")));
             this.Movies.Name = "Movies";
-            this.Movies.Size = new System.Drawing.Size(1362, 654);
+            this.Movies.Size = new System.Drawing.Size(1432, 655);
             this.Movies.Paint += new System.Windows.Forms.PaintEventHandler(this.tabNavigationPage1_Paint);
             // 
             // panelControlMovies
@@ -560,9 +573,9 @@
             this.panelControlMovies.Controls.Add(this.buttonRemove);
             this.panelControlMovies.Controls.Add(this.buttonAdd);
             this.panelControlMovies.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControlMovies.Location = new System.Drawing.Point(0, 554);
+            this.panelControlMovies.Location = new System.Drawing.Point(0, 555);
             this.panelControlMovies.Name = "panelControlMovies";
-            this.panelControlMovies.Size = new System.Drawing.Size(1362, 100);
+            this.panelControlMovies.Size = new System.Drawing.Size(1432, 100);
             this.panelControlMovies.TabIndex = 4;
             // 
             // tabNavigationPage2
@@ -572,7 +585,7 @@
             this.tabNavigationPage2.Controls.Add(this.gridWatched);
             this.tabNavigationPage2.Image = ((System.Drawing.Image)(resources.GetObject("tabNavigationPage2.Image")));
             this.tabNavigationPage2.Name = "tabNavigationPage2";
-            this.tabNavigationPage2.Size = new System.Drawing.Size(1362, 654);
+            this.tabNavigationPage2.Size = new System.Drawing.Size(1432, 655);
             // 
             // panelControlWatched
             // 
@@ -581,43 +594,80 @@
             this.panelControlWatched.Controls.Add(this.buttonRefreshWatched);
             this.panelControlWatched.Controls.Add(this.buttonDeleteWatched);
             this.panelControlWatched.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControlWatched.Location = new System.Drawing.Point(0, 554);
+            this.panelControlWatched.Location = new System.Drawing.Point(0, 555);
             this.panelControlWatched.Name = "panelControlWatched";
-            this.panelControlWatched.Size = new System.Drawing.Size(1362, 100);
+            this.panelControlWatched.Size = new System.Drawing.Size(1432, 100);
             this.panelControlWatched.TabIndex = 9;
             // 
             // buttonRefreshWatched
             // 
-            this.buttonRefreshWatched.Location = new System.Drawing.Point(595, 47);
+            this.buttonRefreshWatched.Location = new System.Drawing.Point(675, 46);
             this.buttonRefreshWatched.Name = "buttonRefreshWatched";
             this.buttonRefreshWatched.Size = new System.Drawing.Size(75, 23);
             this.buttonRefreshWatched.TabIndex = 3;
             this.buttonRefreshWatched.Text = "Refresh";
             this.buttonRefreshWatched.UseVisualStyleBackColor = true;
+            this.buttonRefreshWatched.Click += new System.EventHandler(this.buttonRefreshWatched_Click);
             // 
             // buttonDeleteWatched
             // 
-            this.buttonDeleteWatched.Location = new System.Drawing.Point(403, 47);
+            this.buttonDeleteWatched.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.buttonDeleteWatched.Location = new System.Drawing.Point(516, 46);
             this.buttonDeleteWatched.Name = "buttonDeleteWatched";
             this.buttonDeleteWatched.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteWatched.TabIndex = 2;
             this.buttonDeleteWatched.Text = "Remove";
             this.buttonDeleteWatched.UseVisualStyleBackColor = true;
+            this.buttonDeleteWatched.Click += new System.EventHandler(this.buttonDeleteWatched_Click);
             // 
             // tabNavigationPage3
             // 
             this.tabNavigationPage3.Caption = "WatchList";
+            this.tabNavigationPage3.Controls.Add(this.panelControlWatchList);
             this.tabNavigationPage3.Controls.Add(this.gridWatchList);
             this.tabNavigationPage3.Image = ((System.Drawing.Image)(resources.GetObject("tabNavigationPage3.Image")));
             this.tabNavigationPage3.Name = "tabNavigationPage3";
-            this.tabNavigationPage3.Size = new System.Drawing.Size(1362, 654);
+            this.tabNavigationPage3.Size = new System.Drawing.Size(1432, 655);
+            // 
+            // panelControlWatchList
+            // 
+            this.panelControlWatchList.Controls.Add(this.buttonRefreshWatchList);
+            this.panelControlWatchList.Controls.Add(this.buttonDeleteWatchList);
+            this.panelControlWatchList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControlWatchList.Location = new System.Drawing.Point(0, 555);
+            this.panelControlWatchList.Name = "panelControlWatchList";
+            this.panelControlWatchList.Size = new System.Drawing.Size(1432, 100);
+            this.panelControlWatchList.TabIndex = 8;
+            // 
+            // buttonRefreshWatchList
+            // 
+            this.buttonRefreshWatchList.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.buttonRefreshWatchList.Location = new System.Drawing.Point(675, 46);
+            this.buttonRefreshWatchList.Name = "buttonRefreshWatchList";
+            this.buttonRefreshWatchList.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefreshWatchList.TabIndex = 1;
+            this.buttonRefreshWatchList.Text = "Refresh";
+            this.buttonRefreshWatchList.UseVisualStyleBackColor = true;
+            this.buttonRefreshWatchList.Click += new System.EventHandler(this.buttonRefreshWatchList_Click);
+            // 
+            // buttonDeleteWatchList
+            // 
+            this.buttonDeleteWatchList.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonDeleteWatchList.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.buttonDeleteWatchList.Location = new System.Drawing.Point(516, 46);
+            this.buttonDeleteWatchList.Name = "buttonDeleteWatchList";
+            this.buttonDeleteWatchList.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteWatchList.TabIndex = 0;
+            this.buttonDeleteWatchList.Text = "Remove";
+            this.buttonDeleteWatchList.UseVisualStyleBackColor = true;
+            this.buttonDeleteWatchList.Click += new System.EventHandler(this.buttonDeleteWatchList_Click);
             // 
             // MovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.ClientSize = new System.Drawing.Size(1380, 718);
+            this.ClientSize = new System.Drawing.Size(1450, 719);
             this.Controls.Add(this.tabPane1);
             this.Name = "MovieForm";
             this.Text = "MovieForm";
@@ -643,6 +693,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControlWatched)).EndInit();
             this.panelControlWatched.ResumeLayout(false);
             this.tabNavigationPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControlWatchList)).EndInit();
+            this.panelControlWatchList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -707,5 +759,9 @@
         private DevExpress.XtraEditors.PanelControl panelControlWatched;
         private System.Windows.Forms.Button buttonDeleteWatched;
         private System.Windows.Forms.Button buttonRefreshWatched;
+        private DevExpress.XtraEditors.PanelControl panelControlWatchList;
+        private System.Windows.Forms.Button buttonRefreshWatchList;
+        private System.Windows.Forms.Button buttonDeleteWatchList;
+        private DevExpress.XtraGrid.Columns.GridColumn Producer;
     }
 }

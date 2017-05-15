@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenreType.cs" />
     <Compile Include="MovieForm.cs">
       <SubType>Form</SubType>
     </Compile>

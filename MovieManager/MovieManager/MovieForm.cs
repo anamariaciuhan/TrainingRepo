@@ -12,6 +12,7 @@ using DevExpress;
 using DevExpress.XtraGrid;
 using DevExpress.XtraEditors.Repository;
 using System.Data.Entity;
+using DevExpress.XtraGrid.Views.Base;
 
 namespace MovieManager
 {
@@ -27,8 +28,8 @@ namespace MovieManager
         {
             InitializeComponent();
 
-                       
-           
+
+
         }
 
         private void MovieForm_Load(object sender, EventArgs e)
@@ -39,12 +40,54 @@ namespace MovieManager
             BindDataToGrids();
 
             gridView1.CellValueChanging += HandleWatchedChanged;
+
+           
+
         }
+
+       
 
         private void HandleWatchedChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            
+           
+            MovieGridViewModel selectedMovie = gridView1.GetRow(gridView1.FocusedRowHandle) as MovieGridViewModel;
+            WatchedGridViewModel wgvm = new WatchedGridViewModel(selectedMovie);
+            WatchListGridViewModel wlgvm = new WatchListGridViewModel(selectedMovie);
+
+            if (e.Column.FieldName == "Watched")
+            {
+                if ((bool)e.Value == true)
+                {
+                    WatchedMovieList.Add(wgvm);
+
+                }
+
+                else
+                {
+                    WatchedMovieList.Remove(wgvm);
+                    gridWatched.Refresh();
+
+                }
+                
+
+            }
+
+            else if (e.Column.FieldName == "WatchList")
+            {
+                if ((bool)e.Value == true)
+                {
+                    WatchList.Add(wlgvm);
+                }
+
+                else
+                {
+                    WatchList.Remove(wlgvm);
+                }
+            }
+
         }
+    
+      
 
         private void BindDataToGrids()
         {
@@ -74,14 +117,16 @@ namespace MovieManager
 
         private void LoadGenreCombo(MovieManagerEntities dbContext)
         {
-            var populateGenre = from genre in dbContext.Genre
-                                select genre.GenreType.ToString();
+            var populateGenre = dbContext.Genre.Select(g => new GenreType() {Value = g.GenreID, DisplayText=g.GenreType }).ToList();
+            repositoryItemComboBox1.Items.Clear();
 
-            foreach (var gen in populateGenre)
-            {
-                repositoryItemComboBox1.Items.Add(gen);
+            foreach (var gen in populateGenre) {
+                  repositoryItemComboBox1.Items.Add(gen.DisplayText);
+            
 
             }
+
+         
         }
 
         private static List<WatchListGridViewModel> GetWatchList(MovieManagerEntities dbContext)
@@ -99,7 +144,7 @@ namespace MovieManager
                         Description = watchlist.Movie.Description,
                         Seasons = watchlist.Movie.Seasons,
                         Status = watchlist.Movie.Status,
-                        Genre = watchlist.Movie.Genre.GenreType
+                       // Genre = watchlist.Movie.Genre.GenreType
 
                     }).ToList();
         }
@@ -116,9 +161,9 @@ namespace MovieManager
                         Year = watched.Movie.Year,
                         Producer = watched.Movie.Producer,
                         Description = watched.Movie.Description,
-                        Seasons = watched.Movie.Seasons,
+                        //Seasons = watched.Movie.Seasons,
                         Status = watched.Movie.Status,
-                        Genre = watched.Movie.Genre.GenreType
+                      // Genre = watched.Movie.Genre.GenreType
 
                     }).ToList();
         }
@@ -137,7 +182,7 @@ namespace MovieManager
                                        Description = movie.Description,
                                        Seasons = movie.Seasons,
                                        Status = movie.Status,
-                                       //GenreType=movie.Genre.GenreType,
+                                      // GenreType = movie.Genre.GenreType,
                                        Watched = movie.Watched.Any(),
                                        WatchList = movie.WatchList.Any()
 
@@ -152,10 +197,10 @@ namespace MovieManager
         {
             var newMovie = new MovieGridViewModel();
 
+
             Movielist.Add(newMovie);
 
-          
-
+                 
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -171,23 +216,23 @@ namespace MovieManager
                       movie.Rating = movieViewModel.Rating;
                       movie.Producer = movieViewModel.Producer;
                       movie.Description = movieViewModel.Description;
-                      //movie.Genre.GenreType = movieViewModel.GenreType;
+                     // movie.GenreId =  dbContext.Genre.FirstOrDefault(x => x.GenreType == movieViewModel.GenreType).GenreID;
                       movie.Year = movieViewModel.Year;
                       movie.Seasons = movieViewModel.Seasons;
                       movie.Status = movieViewModel.Status;
 
-          
-                    if (movie.MovieId == 0 )
-                    {
+
+                    if (movie.MovieId == 0)
+                       {
                         var uniqrow = dbContext.Movie.FirstOrDefault(a => a.Title == movie.Title);
 
                         if (uniqrow == null)
                         {
+                            
                             dbContext.Entry(movie).State = System.Data.Entity.EntityState.Added;
                             dbContext.Movie.Add(movie);
-                            
-                            
                         }
+                    
                     }
                     else
                     {
@@ -196,16 +241,41 @@ namespace MovieManager
                         dbContext.Entry(movie).State = System.Data.Entity.EntityState.Modified;
                     }
 
-                    
-                                   
+                   
                 }
 
-                
+                 
+                    Watched watchedMovie = new Watched();
+                    WatchList watchListMovie = new WatchList();
+
+                    foreach (var watchedmov in WatchedMovieList)
+                    {
+
+                      watchedMovie.MovieId = watchedmov.MovieId;
+
+                    
+                    dbContext.Watched.Add(watchedMovie);
+                   
+                    }
+
+                    foreach(var wtchlist in WatchList)
+                {
+                    watchListMovie.MovieId = wtchlist.MovieId;
+
+                    dbContext.WatchList.Add(watchListMovie);
+                }
+
 
                 dbContext.SaveChanges();
 
-               MessageBox.Show("Changes saved");
+                MessageBox.Show("Changes saved");
+
             }
+
+
+
+               
+            
 
             
             
@@ -220,6 +290,7 @@ namespace MovieManager
         }
 
        Movie movie = null;
+
         private List<MovieGridViewModel> moviesGridViewModel;
         private List<WatchedGridViewModel> watchedMoviesGridViewModel;
         private List<WatchListGridViewModel> watchListGridViewModel;
@@ -228,27 +299,34 @@ namespace MovieManager
 
         private void buttonRemove_Click(object sender, EventArgs e) 
         {
-                                         
 
-
-          //  removeButtonClicked = true;
+           
+           //  removeButtonClicked = true;
 
             MovieGridViewModel selectedMovie = gridView1.GetRow(gridView1.FocusedRowHandle) as MovieGridViewModel;
 
             gridView1.DeleteSelectedRows();
 
-              using (var dbContext = new MovieManagerEntities())
-             {
+            using (var dbContext = new MovieManagerEntities())
+            {
 
-               movie = dbContext.Movie.SingleOrDefault(m => m.MovieId == selectedMovie.MovieId);
 
-              dbContext.Entry(movie).State = System.Data.Entity.EntityState.Deleted;
+                movie = dbContext.Movie.SingleOrDefault(m => m.MovieId == selectedMovie.MovieId);
 
-               dbContext.SaveChanges();
+                                   
+                dbContext.Entry(movie).State = System.Data.Entity.EntityState.Deleted;
+
+                dbContext.SaveChanges();
+
+            }
+              
             }
 
 
-        }
+        
+
+
+        
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
 
@@ -282,6 +360,78 @@ namespace MovieManager
 
         private void gridWatched_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void buttonRefreshWatchList_Click(object sender, EventArgs e)
+        {
+            LoadData();
+
+            BindDataToGrids();
+        }
+
+        private void buttonDeleteWatched_Click(object sender, EventArgs e)
+        {
+
+            WatchedGridViewModel selectedMovie = gridViewWatched.GetRow(gridViewWatched.FocusedRowHandle) as WatchedGridViewModel;
+
+            gridViewWatched.DeleteSelectedRows();
+
+            Watched wmovie = null;
+
+            using (var dbContext = new MovieManagerEntities())
+            {
+
+
+              wmovie = dbContext.Watched.SingleOrDefault(m => m.WatchedId == selectedMovie.WatchedId);
+
+
+                dbContext.Entry(wmovie).State = System.Data.Entity.EntityState.Deleted;
+
+                
+                dbContext.SaveChanges();
+
+                LoadData();
+
+                BindDataToGrids();
+
+            }
+
+        }
+
+        private void buttonRefreshWatched_Click(object sender, EventArgs e)
+        {
+            LoadData();
+
+            BindDataToGrids();
+        }
+
+        private void buttonDeleteWatchList_Click(object sender, EventArgs e)
+        {
+
+            WatchListGridViewModel selectedMovie = gridViewWatchList.GetRow(gridViewWatchList.FocusedRowHandle) as WatchListGridViewModel;
+
+            gridViewWatchList.DeleteSelectedRows();
+
+            WatchList wlmovie = null;
+
+            using (var dbContext = new MovieManagerEntities())
+            {
+
+
+                 wlmovie = dbContext.WatchList.SingleOrDefault(m => m.WatchListId == selectedMovie.WatchListId);
+
+
+                dbContext.Entry(wlmovie).State = System.Data.Entity.EntityState.Deleted;
+
+
+                dbContext.SaveChanges();
+
+                LoadData();
+
+                BindDataToGrids();
+
+            }
 
         }
     }
