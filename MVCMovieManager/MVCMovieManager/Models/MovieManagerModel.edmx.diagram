@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="41ccdfd933c04ae184ddec3deae22f9d" Name="Diagram1">
+        <EntityTypeShape EntityType="MovieManagerModel.Actor" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieManagerModel.Cast" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieManagerModel.Genre" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieManagerModel.Login" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieManagerModel.Movie" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieManagerModel.Watched" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieManagerModel.WatchList" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="MovieManagerModel.FK__Cast__ActorId__4830B400" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieManagerModel.FK__Cast__MovieId__4924D839" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieManagerModel.FK__Movie__GenreId__3F9B6DFF" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieManagerModel.FK__Watched__MovieId__4277DAAA" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieManagerModel.FK__WatchList__Movie__45544755" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
