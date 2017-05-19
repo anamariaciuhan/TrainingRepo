@@ -58,3 +58,4 @@ D:\Projects\ContosoExample\ContosoExample\bin\PagedList.dll
 D:\Projects\ContosoExample\ContosoExample\bin\PagedList.Mvc.dll
 D:\Projects\ContosoExample\ContosoExample\bin\PagedList.xml
 D:\Projects\ContosoExample\ContosoExample\bin\PagedList.Mvc.xml
+D:\Projects\ContosoExample\ContosoExample\obj\Debug\ContosoExample.csprojResolveAssemblyReference.cache

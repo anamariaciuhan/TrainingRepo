@@ -22,8 +22,7 @@ namespace ContosoExample.Controllers
         // GET: Student
         public ActionResult Index(string sortOrder,string currentFilter ,string searchString, int? page)
         {
-            db.Students.AD
-
+            
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -62,7 +61,7 @@ namespace ContosoExample.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize =5;
             int pageNumber = (page ?? 1);
 
             return View(students.ToPagedList(pageNumber, pageSize) );
