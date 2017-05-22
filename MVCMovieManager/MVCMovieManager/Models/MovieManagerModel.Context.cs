@@ -30,7 +30,7 @@ namespace MVCMovieManager.Models
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
-        public virtual DbSet<Watched> Watcheds { get; set; }
-        public virtual DbSet<WatchList> WatchLists { get; set; }
+        public virtual DbSet<Watched> Watched { get; set; }
+        public virtual DbSet<WatchList> WatchList { get; set; }
     }
 }

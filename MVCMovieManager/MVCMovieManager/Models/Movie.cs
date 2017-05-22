@@ -12,6 +12,7 @@ namespace MVCMovieManager.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Movie
@@ -20,28 +21,34 @@ namespace MVCMovieManager.Models
         public Movie()
         {
             this.Casts = new HashSet<Cast>();
-            this.Watcheds = new HashSet<Watched>();
-            this.WatchLists = new HashSet<WatchList>();
+            this.Watched = new HashSet<Watched>();
+            this.WatchList = new HashSet<WatchList>();
         }
     
         public int MovieId { get; set; }
         public string Title { get; set; }
         public Nullable<double> Rating { get; set; }
+
+
+        [Display(Name = "Release Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Year { get; set; }
+
         public string Producer { get; set; }
         public string Description { get; set; }
         public Nullable<int> Seasons { get; set; }
         public string Status { get; set; }
 
-        [Column("Genre")]
+        
         public Nullable<int> GenreId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cast> Casts { get; set; }
         public virtual Genre Genre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Watched> Watcheds { get; set; }
+        public virtual ICollection<Watched> Watched { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WatchList> WatchLists { get; set; }
+        public virtual ICollection<WatchList> WatchList { get; set; }
     }
 }

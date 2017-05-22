@@ -14,6 +14,7 @@ namespace MVCMovieManager.Controllers
     {
         private MovieManagerEntities db = new MovieManagerEntities();
 
+
         // GET: WatchList
         public ActionResult Index()
         {

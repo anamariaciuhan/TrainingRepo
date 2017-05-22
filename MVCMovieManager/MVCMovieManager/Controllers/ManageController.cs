@@ -100,7 +100,7 @@ namespace MVCMovieManager.Controllers
         }
 
         //
-        // GET: /Manage/AddPhoneNumber
+        // GET: /Manage/AddPhoneNumberF
         public ActionResult AddPhoneNumber()
         {
             return View();

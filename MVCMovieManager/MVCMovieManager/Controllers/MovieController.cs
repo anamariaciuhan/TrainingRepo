@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCMovieManager.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace MVCMovieManager.Controllers
 {
@@ -15,11 +17,49 @@ namespace MVCMovieManager.Controllers
         private MovieManagerEntities db = new MovieManagerEntities();
 
         // GET: Movies
-        public ActionResult Index()
+        public ActionResult Index( string searchString, string Genre, int? page )
         {
-            var movies = db.Movies.Include(m => m.Genre);
-            return View(movies.ToList());
+
+            var movies = from m in db.Movies
+                         select m;
+
+            var GenreLst = new List<string>();
+
+            var GenreQry = from d in db.Movies
+                            orderby d.Genre.GenreType
+                           select d.Genre.GenreType;
+
+            GenreLst.AddRange(GenreQry.Distinct());
+            ViewBag.Genre = new SelectList(GenreLst);
+
+            ViewBag.CurrentFilter = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+
+                movies = movies.Where(s => s.Title.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(Genre))
+            {
+                movies = movies.Where(x => x.Genre.GenreType == Genre);
+            }
+
+            
+
+            return View(movies.ToList().ToPagedList(page ?? 1,3));
         }
+
+        [HttpPost]
+        //public ActionResult AddtoWL(bool checkbox=false)
+        //{
+        //    var mov = (from m in db.Movies
+        //               select m.MovieId).ToList();
+
+           
+        //}
+     
+  
 
         // GET: Movies/Details/5
         public ActionResult Details(int? id)

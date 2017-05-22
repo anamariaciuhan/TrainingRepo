@@ -15,7 +15,7 @@ namespace MVCMovieManager.Models
     public partial class WatchList:Movie
     {
        public int WatchListId { get; set; }
-      //  public int MovieId { get; set; }
+      // public int MovieId { get; set; }
     
         public virtual Movie Movie { get; set; }
     }

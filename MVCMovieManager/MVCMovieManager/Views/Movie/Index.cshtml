@@ -1,75 +1,113 @@
-﻿@model IEnumerable<MVCMovieManager.Models.Movie>
+﻿@model IPagedList<MVCMovieManager.Models.Movie>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movie";
 }
 
 <h2>All Movies</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
+
+
+
+    @using (Html.BeginForm("Index", "Movie", FormMethod.Get))
+    {
+
+
+        <div class="form-group">
+            <div class="col-md-offset-0 col-md-5">
+                Genre: @Html.DropDownList("Genre", "All")
+                Title: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+            </div>
+
+            <input type="button" value="WatchList" onclick="location.href='@Url.Action("AddtoWatchList","Movie")'" />
+            <input type="button" value="Watched" onclick="location.href='@Url.Action("AddtoWatched","Movie")'" />
+
+        </div>
+
+
+    }
+
+
 </p>
 <table class="table">
+
     <tr>
+        <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Rating)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Rating)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Year)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Year)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Producer)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Producer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Seasons)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Seasons)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre.GenreType)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Genre.GenreType)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Producer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Seasons)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre.GenreType)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+       <tr>
+           <td>
+               <input type="checkbox" name="checkbox" value=false />    
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seasons)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre.GenreType)
+            </td>
+          
+            <td>
+                @*@Html.ActionLink("AddtoWatchlist", "AddtoWatchlist", new { id = item.MovieId }) |*@
+                @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MovieId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MovieId })
+            </td>
+        </tr>
+    }
 
 </table>
+<input type="submit" value="Submit" />
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+

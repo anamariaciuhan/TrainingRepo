@@ -79,3 +79,7 @@ D:\Projects\MVCMovieManager\MVCMovieManager\bin\Microsoft.Owin.Security.Microsof
 D:\Projects\MVCMovieManager\MVCMovieManager\obj\Debug\MVCMovieManager.csprojResolveAssemblyReference.cache
 D:\Projects\MVCMovieManager\MVCMovieManager\obj\Debug\MVCMovieManager.dll
 D:\Projects\MVCMovieManager\MVCMovieManager\obj\Debug\MVCMovieManager.pdb
+D:\Projects\MVCMovieManager\MVCMovieManager\bin\PagedList.dll
+D:\Projects\MVCMovieManager\MVCMovieManager\bin\PagedList.Mvc.dll
+D:\Projects\MVCMovieManager\MVCMovieManager\bin\PagedList.xml
+D:\Projects\MVCMovieManager\MVCMovieManager\bin\PagedList.Mvc.xml
