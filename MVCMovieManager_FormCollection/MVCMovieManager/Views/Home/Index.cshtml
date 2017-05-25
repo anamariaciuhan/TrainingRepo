@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>My Movie Manager</h1>
+    <p class="lead">My Movie Manager is a simple to use, yet customizable, application.</p>
+   
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+       @Html.ActionLink("List of Movies", "Index", "Movie")<br />
+       @Html.ActionLink("Watch List", "Index", "WatchList")<br/>
+       @Html.ActionLink("Watched Movies", "Index", "Watched")
+
+    </div>
+    
+</div>

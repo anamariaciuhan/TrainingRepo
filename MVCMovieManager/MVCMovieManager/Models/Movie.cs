@@ -21,10 +21,11 @@ namespace MVCMovieManager.Models
         public Movie()
         {
             this.Casts = new HashSet<Cast>();
-            this.Watched = new HashSet<Watched>();
-            this.WatchList = new HashSet<WatchList>();
+            this.Watcheds = new HashSet<Watched>();
+            this.WatchLists = new HashSet<WatchList>();
         }
     
+        public bool CheckBox { get; set; }
         public int MovieId { get; set; }
         public string Title { get; set; }
         public Nullable<double> Rating { get; set; }
@@ -47,8 +48,8 @@ namespace MVCMovieManager.Models
         public virtual ICollection<Cast> Casts { get; set; }
         public virtual Genre Genre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Watched> Watched { get; set; }
+        public virtual ICollection<Watched> Watcheds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WatchList> WatchList { get; set; }
+        public virtual ICollection<WatchList> WatchLists { get; set; }
     }
 }
