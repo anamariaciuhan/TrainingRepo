@@ -22,11 +22,11 @@ namespace MVCMovieManager.Controllers
         public ActionResult Index( string searchString, string Genre, int? page )
         {
 
-            var movies = db.Movies.Include("WatchLists").ToList();
+            var movies = db.Movies.Include("WatchLists").Include("Watcheds").ToList();
 
             //var wahtchmovie = (from wm in db.WatchList
             //                  select wm).ToList();
-                               
+
 
             //foreach (var watchmov in wahtchmovie)
             //{
@@ -66,48 +66,92 @@ namespace MVCMovieManager.Controllers
             return View(movies.ToList().ToPagedList(page ?? 1,3));
         }
 
-        [HttpPost]
-        public ActionResult WatchListCollection(FormCollection formcoll)
-        {
 
+
+
+
+       
+
+
+        [HttpPost]
+        public ActionResult FormCollection(FormCollection formcoll)
+        {
+            
             foreach (var key in formcoll.AllKeys)
             {
 
-
                 var movieId = Convert.ToInt32(key.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1]);
 
+                if (key.Contains("watchlist_"))
+                HandleWatchList(formcoll, key, movieId);
 
-                bool watchlistValue = false;
-                if (formcoll[key].Contains("true,false"))
-                {
-                    watchlistValue = true;
-                }
+                else if(key.Contains("watched_"))
 
-                var movieExists = db.WatchList.FirstOrDefault(x => x.MovieId == movieId);
+                HandleWatched(formcoll, key, movieId);
 
-                if (watchlistValue && movieExists==null)
-                { 
-                    db.WatchList.Add(new WatchList { MovieId = movieId });
-                   
-                }
-                else if(!watchlistValue && movieExists != null)
-                {
-                    db.WatchList.Remove(movieExists);
-                }
             }
+
+
 
             db.SaveChanges();
 
-
-
-
-
-
-
-
+         
 
             return RedirectToAction("Index");
 
+        }
+
+        private void HandleWatched(FormCollection formcoll, string key, int movieId)
+        {
+            bool watchedValue = false;
+
+
+            if (formcoll[key].Contains("true,false"))
+            {
+                watchedValue = true;
+
+            }
+
+            var watchedExists = db.Watched.FirstOrDefault(x => x.MovieId == movieId);
+
+
+            if (watchedValue&& watchedExists == null)
+            {
+                db.Watched.Add(new Watched { MovieId = movieId });
+
+            }
+
+            else if (!watchedValue && watchedExists != null)
+            {
+                db.Watched.Remove(watchedExists);
+            }
+
+        }
+
+        private void HandleWatchList(FormCollection formcoll, string key, int movieId)
+        {
+            bool watchlistValue = false;
+
+
+            if (formcoll[key].Contains("true,false"))
+            {
+                watchlistValue = true;
+
+            }
+
+            var movieExists = db.WatchList.FirstOrDefault(x => x.MovieId == movieId);
+
+
+            if (watchlistValue && movieExists == null)
+            {
+                db.WatchList.Add(new WatchList { MovieId = movieId });
+
+            }
+
+            else if (!watchlistValue && movieExists != null)
+            {
+                db.WatchList.Remove(movieExists);
+            }
         }
 
 

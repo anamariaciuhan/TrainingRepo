@@ -22,104 +22,107 @@
                 Genre: @Html.DropDownList("Genre", "All")
                 Title: @Html.TextBox("SearchString")
                 <input type="submit" value="Search" />
+
             </div>
 
-           
-        </div>
 
+        </div>
 
     }
 
 
 </p>
-@using (Html.BeginForm("WatchListCollection", "Movie", FormMethod.Post))
+@using (Html.BeginForm("FormCollection", "Movie", FormMethod.Post))
 {
-<table class="table">
+    <table class="table">
 
-    <tr>
-        <th>Watching</th>
-        <th>
-         
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Producer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Seasons)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Genre.GenreType)
-        </th>
-        <th></th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                Watched
+            </th>
+            <th>Watching</th>
+            <th>
 
-    @foreach (var item in Model)
-    {
-       <tr>
-           @*<td>
-              <input type="checkbox" name="checkvalue" id="WatchListCheckbox"  value="false" />    
-              *@
-          
-          <td>
-            @Html.CheckBox("watchlist_" +item.MovieId , item.WatchList )
-        </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Producer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Seasons)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre.GenreType)
-            </td>
-           @*<td>
-               @Html.Hidden("movieId_" + item.MovieId.ToString(), item.MovieId)
-           </td>*@
-
-
-            <td>
-                @*@Html.ActionLink("AddtoWatchlist", "AddtoWatchlist", new { id = item.MovieId }) |*@
-                @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MovieId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MovieId })
-            </td>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Producer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Seasons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Genre.GenreType)
+            </th>
+            <th></th>
+            <th></th>
         </tr>
-    }
 
-</table>
-<input type="submit" value="Submit" />
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("watched_" + item.MovieId, item.Watched)
+                </td>
+
+                <td>
+                    @Html.CheckBox("watchlist_" + item.MovieId, item.WatchList)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seasons)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.GenreType)
+                </td>
+
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MovieId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MovieId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <input type="submit" value="Save Changes" />
+
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
 }
 

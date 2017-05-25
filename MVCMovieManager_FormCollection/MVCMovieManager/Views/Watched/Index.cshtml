@@ -9,8 +9,11 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Favourite", "Watched", FormMethod.Post))
+{
 <table class="table">
     <tr>
+        
         <th>
             @Html.DisplayNameFor(model => model.Movie.Title)
         </th>
@@ -44,41 +47,46 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Favourite)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Movie.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Rating)
+            @Html.DisplayFor(modelItem => item.Movie.Rating)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Year)
+            @Html.DisplayFor(modelItem => item.Movie.Year)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Producer)
+            @Html.DisplayFor(modelItem => item.Movie.Producer)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.Movie.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Seasons)
+            @Html.DisplayFor(modelItem => item.Movie.Seasons)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            @Html.DisplayFor(modelItem => item.Movie.Status)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Genre.GenreType)
+            @Html.DisplayFor(modelItem => item.Movie.Genre.GenreType)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.WatchedId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.WatchedId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.WatchedId })
+            @Html.CheckBox( "favourite_" + item.MovieId, item.Favourite.Value)
+         </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.WatchedId }) |*@
+            @Html.ActionLink("Details", "Details", new { id = item.WatchedId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.WatchedId })
         </td>
     </tr>
 }
-
+    
+    
 </table>
+<input type="submit" value="Save Changes" />
+}

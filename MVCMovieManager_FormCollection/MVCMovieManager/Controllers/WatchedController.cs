@@ -17,8 +17,34 @@ namespace MVCMovieManager.Controllers
         // GET: Watched
         public ActionResult Index()
         {
-            var watcheds = db.Watched.Include(w => w.Movie);
-            return View(watcheds.ToList());
+            var watcheds = db.Watched.Include(w => w.Movie).ToList();
+
+
+
+            return View(watcheds);
+
+
+        }
+
+
+        public ActionResult Favourite(FormCollection formCollection)
+        {
+            foreach (var key in formCollection.AllKeys)
+            {
+                var movieId = Convert.ToInt32(key.Split(new string[] { "_" }, StringSplitOptions.RemoveEmptyEntries)[1]);
+
+                bool isFavourite = formCollection[key].Contains("true,false");
+
+                var watchedMovie = db.Watched.FirstOrDefault(x => x.MovieId == movieId);
+
+                watchedMovie.Favourite = isFavourite;
+
+                db.Entry(watchedMovie).State = EntityState.Modified;
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Watched/Details/5
