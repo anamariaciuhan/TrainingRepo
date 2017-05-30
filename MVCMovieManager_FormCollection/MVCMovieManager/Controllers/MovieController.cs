@@ -10,6 +10,7 @@ using MVCMovieManager.Models;
 using PagedList;
 using PagedList.Mvc;
 using MVCMovieManager.ViewModels;
+using MVCMovieManager.Helpers;
 
 namespace MVCMovieManager.Controllers
 {
@@ -21,33 +22,12 @@ namespace MVCMovieManager.Controllers
         // GET: Movies
         public ActionResult Index(string searchString, int? genreId, int? page )
         {
-
             var movies = db.Movies.Include("WatchLists").Include("Watcheds").ToList();
 
-          
-           
+            var filtredList = GeneralFilters<Movie>.FilterGeneral(movies, searchString,genreId);
 
-          
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-
-                movies = movies.Where(s => s.Title.Contains(searchString)).ToList();
-            }
-
-            if (genreId!= null&&genreId != -1)
-            {
-                movies = movies.Where(x => x.Genre.GenreID == genreId).ToList();
-            }
-
-
-            return View(movies.ToList().ToPagedList(page ?? 1,3));
+            return View(filtredList.ToList().ToPagedList(page ?? 1,3));
         }
-
-
-
-        
-
 
 
         [HttpPost]

@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCMovieManager.Models;
+using PagedList;
+using MVCMovieManager.Helpers;
 
 namespace MVCMovieManager.Controllers
 {
@@ -16,10 +18,13 @@ namespace MVCMovieManager.Controllers
 
 
         // GET: WatchList
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? genreId, int? page)
         {
             var watchLists = db.WatchList.Include(w => w.Movie);
-            return View(watchLists.ToList());
+
+            var filtredList = GeneralFilters<WatchList>.FilterGeneral(watchLists, searchString, genreId);
+
+            return View(filtredList.ToList().ToPagedList(page ?? 1, 3));
         }
 
         // GET: WatchList/Details/5

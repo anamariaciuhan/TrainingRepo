@@ -5,9 +5,10 @@ namespace MVCMovieManager.ViewModels
       public class MovieViewModel
     {
         public MovieViewModel()
-        { }
+        {
+        }
 
-
+      
         public string Description { get; internal set; }
         public string GenreType { get; internal set; }
         public int MovieId { get; internal set; }

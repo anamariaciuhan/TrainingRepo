@@ -7,6 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCMovieManager.Models;
+using MVCMovieManager.ViewModels;
+using AutoMapper;
+using PagedList;
+using MVCMovieManager.Helpers;
 
 namespace MVCMovieManager.Controllers
 {
@@ -15,17 +19,21 @@ namespace MVCMovieManager.Controllers
         private MovieManagerEntities db = new MovieManagerEntities();
 
         // GET: Watched
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int? genreId, int? page)
         {
-            var watcheds = db.Watched.Include(w => w.Movie).ToList();
 
+            
 
+           var  watcheds = db.Watched.Include(w => w.Movie).ToList();
 
-            return View(watcheds);
+            var filtredList = GeneralFilters<Watched>.FilterGeneral(watcheds, searchString, genreId);
+
+            return View(filtredList.ToList().ToPagedList(page ?? 1, 3));
 
 
         }
 
+       
 
         public ActionResult Favourite(FormCollection formCollection)
         {

@@ -1,4 +1,8 @@
-﻿@model IEnumerable<MVCMovieManager.Models.Watched>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<MVCMovieManager.Models.Watched>
+
 
 @{
     ViewBag.Title = "Index";
@@ -6,87 +10,114 @@
 
 <h2>Watched</h2>
 
-<p>
+<div>
     @Html.ActionLink("Create New", "Create")
-</p>
+
+
+    @{Html.RenderAction("Search_Partial", "Search", new { viewName = "Watched" }); }
+
+</div>
+{
+
+
+
+  
 @using (Html.BeginForm("Favourite", "Watched", FormMethod.Post))
 {
-<table class="table">
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Movie.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Producer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Seasons)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Genre.GenreType)
-        </th>
+    <table class="table">
+
+        <tr>
+            <th>
+                Watched
+            </th>
+            <th>Watching</th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Producer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Seasons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Genre.GenreType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Favourite)
+            
+            </th>
+           
+        </tr>
 
 
-        <th>
-            @Html.DisplayNameFor(model => model.Favourite)
-        </th>
-       
-        <th></th>
-    </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Producer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Seasons)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Genre.GenreType)
-        </td>
-        <td>
-            @Html.CheckBox( "favourite_" + item.MovieId, item.Favourite.Value)
-         </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.WatchedId }) |*@
-            @Html.ActionLink("Details", "Details", new { id = item.WatchedId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.WatchedId })
-        </td>
-    </tr>
-}
-    
-    
-</table>
-<input type="submit" value="Save Changes" />
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("watched_" + item.MovieId, item.Watched)
+                </td>
+
+                <td>
+                    @Html.CheckBox("watchlist_" + item.MovieId, item.WatchList)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seasons)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.GenreType)
+                </td>
+                <td>
+                    @Html.CheckBox("favourite_" + item.MovieId, item.Favourite.Value)
+                </td>
+
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MovieId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MovieId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <input type="submit" value="Save Changes" />
+
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
 }

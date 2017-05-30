@@ -226,6 +226,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Helpers\GeneralFilters.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\WatchedController.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\WatchedViewModel.cs" />
     <Compile Include="ViewModels\WatchListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

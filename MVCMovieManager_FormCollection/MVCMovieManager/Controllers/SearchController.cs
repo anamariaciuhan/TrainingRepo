@@ -19,81 +19,37 @@ namespace MVCMovieManager.Controllers
 
 
 
-        //public ActionResult Search(string SearchString, string Genre)
-        //{
-
-        //    List<MovieViewModel> moviesViewModel;
-        //    moviesViewModel = (from movie in db.Movies
-        //                       select new MovieViewModel()
-        //                       {
-        //                           MovieId = movie.MovieId,
-        //                           Title = movie.Title,
-        //                           Rating = movie.Rating,
-        //                           Year = movie.Year,
-        //                           Producer = movie.Producer,
-        //                           Description = movie.Description,
-        //                           Seasons = movie.Seasons,
-        //                           Status = movie.Status,
-        //                           GenreType = movie.Genre.GenreType,
-        //                           Watched = movie.Watcheds.Any(),
-        //                           WatchList = movie.WatchLists.Any()
-
-        //                       }).ToList();
-
-        //    var movies = db.Movies.ToList();
-        //    MainViewModel getMainPageModel = new MainViewModel();
-
-        //    var filter = new FilterViewModel();
-
-        //    filter.GenreTypes = db.Genres.Select(gen => new SelectListItem() { Value = gen.GenreID.ToString(), Text = gen.GenreType }).ToList();
-        //    filter.GenreTypes.Add(new SelectListItem() { Value = "0", Text = "All" });
-        //    filter.SearchString = string.Empty;
-
-
-        //    var GenreQry = from d in db.Genres
-        //                   orderby d.GenreType
-        //                   select d.GenreType;
-
-
-
-
-
-
-        //    if (!String.IsNullOrEmpty(searchString))
-        //    {
-
-        //        movies = movies.Where(s => s.Title.Contains(searchString)).ToList();
-        //    }
-
-        //    if (!string.IsNullOrEmpty(Genre))
-        //    {
-        //        movies = movies.Where(x => x.Genre.GenreType == Genre).ToList();
-        //    }
-
-
-        //    return PartialView("_Search");
-        //}
-
         [HttpGet]
-        public PartialViewResult Search_Partial()
+        public PartialViewResult Search_Partial(string viewName)
         {
-         
+            //reset filter in when viewName is different than previous in session
+
+            if (Session["viewName"] != null && Session["viewName"].ToString() !=viewName)
+            {
+                Session["searchString"] = string.Empty ;
+                Session["selectedGenre"] = -1;
+            }
+
+            Session["viewName"] = viewName;
 
             FilterViewModel filterViewModel = new FilterViewModel();
 
             filterViewModel.GenreTypes = db.Genres.Select(gen => new SelectListItem() { Value = gen.GenreID.ToString(), Text = gen.GenreType }).ToList();
 
-            filterViewModel.GenreTypes.Add(new SelectListItem() { Value = "-1", Text ="All" });
+            filterViewModel.GenreTypes.Add(new SelectListItem() { Value = "-1", Text = "All" });
 
 
-            filterViewModel.SearchString = Session["selectedTitle"] == null ? "" : Session["selectedTitle"].ToString();
+            filterViewModel.SearchString = Session["searchString"] == null ? "" : Session["searchString"].ToString();
             filterViewModel.SelectedGenre = Session["selectedGenre"] == null ? -1 : int.Parse(Session["selectedGenre"].ToString());
 
-           
-        
+
+
 
             return PartialView("Search_Partial", filterViewModel);
         }
+
+
+        
 
 
         [HttpPost]
@@ -101,10 +57,11 @@ namespace MVCMovieManager.Controllers
         {
 
             Session["selectedGenre"] = filter.SelectedGenre;
-            Session["selectedTitle"] = filter.SearchString;
+            Session["searchString"] = filter.SearchString;
 
+            var viewNameToRedirect = Session["viewName"].ToString();
 
-           return RedirectToAction ("Index", "Movie", new {  searchString = filter.SearchString ,  genreId=filter.SelectedGenre});
+           return RedirectToAction ("Index", viewNameToRedirect, new {  searchString = filter.SearchString ,  genreId=filter.SelectedGenre});
 
         }
 

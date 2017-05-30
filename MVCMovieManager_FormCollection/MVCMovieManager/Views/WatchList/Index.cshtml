@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MVCMovieManager.Models.WatchList>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<MVCMovieManager.Models.WatchList>
 
 @{
     ViewBag.Title = "Index";
@@ -6,34 +8,41 @@
 
 <h2>Watching</h2>
 
-<p>
+<div>
     @Html.ActionLink("Create New", "Create")
-</p>
+
+
+    @{Html.RenderAction("Search_Partial", "Search", new { viewName = "WatchList" }); }
+
+
+</div>
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Movie.Title)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Rating )
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Rating )
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Year)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Year)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Producer)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Producer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Seasons)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Seasons)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre.GenreType)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Genre.GenreType)
         </th>
 
 
@@ -75,3 +84,5 @@
 }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

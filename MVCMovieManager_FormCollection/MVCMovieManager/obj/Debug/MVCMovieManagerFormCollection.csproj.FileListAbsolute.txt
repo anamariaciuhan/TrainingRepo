@@ -175,3 +175,4 @@ D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Web.Http.W
 D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Net.Http.Formatting.xml
 D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Web.Http.xml
 D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Web.Http.WebHost.xml
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\obj\Debug\MVCMovieManagerFormCollection.csprojResolveAssemblyReference.cache
