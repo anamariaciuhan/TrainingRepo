@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="MovieManagerModel.WatchList" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
         <AssociationConnector Association="MovieManagerModel.FK__Cast__ActorId__4830B400" ManuallyRouted="false" />
         <AssociationConnector Association="MovieManagerModel.FK__Cast__MovieId__4924D839" ManuallyRouted="false" />
-        <AssociationConnector Association="MovieManagerModel.FK__Movie__GenreId__3F9B6DFF" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieManagerModel.FK__Movie__GenreID__3F9B6DFF" ManuallyRouted="false" />
         <AssociationConnector Association="MovieManagerModel.FK__Watched__MovieId__4277DAAA" ManuallyRouted="false" />
         <AssociationConnector Association="MovieManagerModel.FK__WatchList__Movie__45544755" ManuallyRouted="false" />
       </Diagram>

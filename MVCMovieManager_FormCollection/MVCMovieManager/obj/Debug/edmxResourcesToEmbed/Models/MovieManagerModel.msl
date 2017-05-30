@@ -48,7 +48,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Seasons" ColumnName="Seasons" />
           <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+          <ScalarProperty Name="GenreID" ColumnName="GenreID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

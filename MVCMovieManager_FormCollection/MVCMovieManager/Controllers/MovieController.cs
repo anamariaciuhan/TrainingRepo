@@ -19,36 +19,15 @@ namespace MVCMovieManager.Controllers
         
 
         // GET: Movies
-        public ActionResult Index( string searchString, string Genre, int? page )
+        public ActionResult Index(string searchString, int? genreId, int? page )
         {
 
             var movies = db.Movies.Include("WatchLists").Include("Watcheds").ToList();
 
-            //var wahtchmovie = (from wm in db.WatchList
-            //                  select wm).ToList();
+          
+           
 
-
-            //foreach (var watchmov in wahtchmovie)
-            //{
-            //    foreach (var mov in movies)
-            //    {
-            //        if (watchmov.MovieId==mov.MovieId)
-            //        {
-            //            mov.WatchList = true;
-            //        }
-            //    }
-            //}
-
-            var GenreLst = new List<string>();
-
-            var GenreQry = from d in db.Movies
-                            orderby d.Genre.GenreType
-                           select d.Genre.GenreType;
-
-            GenreLst.AddRange(GenreQry.Distinct());
-            ViewBag.Genre = new SelectList(GenreLst);
-
-            ViewBag.CurrentFilter = searchString;
+          
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -56,21 +35,19 @@ namespace MVCMovieManager.Controllers
                 movies = movies.Where(s => s.Title.Contains(searchString)).ToList();
             }
 
-            if (!string.IsNullOrEmpty(Genre))
+            if (genreId!= null&&genreId != -1)
             {
-                movies = movies.Where(x => x.Genre.GenreType == Genre).ToList();
+                movies = movies.Where(x => x.Genre.GenreID == genreId).ToList();
             }
 
-            
 
             return View(movies.ToList().ToPagedList(page ?? 1,3));
         }
 
 
 
+        
 
-
-       
 
 
         [HttpPost]
@@ -174,7 +151,7 @@ namespace MVCMovieManager.Controllers
         // GET: Movies/Create
         public ActionResult Create()
         {
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreID", "GenreType");
+            ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "GenreType");
             return View();
         }
 
@@ -183,7 +160,7 @@ namespace MVCMovieManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MovieId,Title,Rating,Year,Producer,Description,Seasons,Status,GenreId")] Movie movie)
+        public ActionResult Create([Bind(Include = "MovieId,Title,Rating,Year,Producer,Description,Seasons,Status,GenreID")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -192,7 +169,7 @@ namespace MVCMovieManager.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreID", "GenreType", movie.GenreId);
+            ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "GenreType", movie.GenreID);
             return View(movie);
         }
 
@@ -208,7 +185,7 @@ namespace MVCMovieManager.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreID", "GenreType", movie.GenreId);
+            ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "GenreType", movie.GenreID);
             return View(movie);
         }
 
@@ -217,7 +194,7 @@ namespace MVCMovieManager.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MovieId,Title,Rating,Year,Producer,Description,Seasons,Status,GenreId")] Movie movie)
+        public ActionResult Edit([Bind(Include = "MovieId,Title,Rating,Year,Producer,Description,Seasons,Status,GenreID")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -225,7 +202,7 @@ namespace MVCMovieManager.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreID", "GenreType", movie.GenreId);
+            ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "GenreType", movie.GenreID);
             return View(movie);
         }
 

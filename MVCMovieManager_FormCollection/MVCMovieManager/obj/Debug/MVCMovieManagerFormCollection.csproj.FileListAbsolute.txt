@@ -167,4 +167,11 @@ D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\Microsoft.Owin.Se
 D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\obj\Debug\MVCMovieManager.dll
 D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\obj\Debug\MVCMovieManager.pdb
-D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\obj\Debug\MVCMovieManagerFormCollection.csprojResolveAssemblyReference.cache
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\AutoMapper.dll
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\AutoMapper.xml
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Net.Http.Formatting.dll
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Web.Http.dll
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Web.Http.WebHost.dll
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Net.Http.Formatting.xml
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Web.Http.xml
+D:\Projects\MVCMovieManager_FormCollection\MVCMovieManager\bin\System.Web.Http.WebHost.xml

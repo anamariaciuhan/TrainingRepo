@@ -44,7 +44,7 @@
     <Property Name="Description" Type="varchar" MaxLength="50" />
     <Property Name="Seasons" Type="int" />
     <Property Name="Status" Type="varchar" MaxLength="50" />
-    <Property Name="GenreId" Type="int" />
+    <Property Name="GenreID" Type="int" />
   </EntityType>
   <EntityType Name="Watched">
     <Key>
@@ -89,7 +89,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Movie__GenreId__3F9B6DFF">
+  <Association Name="FK__Movie__GenreID__3F9B6DFF">
     <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
@@ -99,7 +99,7 @@
         <PropertyRef Name="GenreID" />
       </Principal>
       <Dependent Role="Movie">
-        <PropertyRef Name="GenreId" />
+        <PropertyRef Name="GenreID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -143,7 +143,7 @@
       <End Role="Movie" EntitySet="Movie" />
       <End Role="Cast" EntitySet="Cast" />
     </AssociationSet>
-    <AssociationSet Name="FK__Movie__GenreId__3F9B6DFF" Association="Self.FK__Movie__GenreId__3F9B6DFF">
+    <AssociationSet Name="FK__Movie__GenreID__3F9B6DFF" Association="Self.FK__Movie__GenreID__3F9B6DFF">
       <End Role="Genre" EntitySet="Genre" />
       <End Role="Movie" EntitySet="Movie" />
     </AssociationSet>

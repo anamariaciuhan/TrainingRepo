@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "Movie";
+
 }
 
 <h2>All Movies</h2>
@@ -11,24 +12,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 
+   
+   @{Html.RenderAction("Search_Partial","Search"); }
 
 
-    @using (Html.BeginForm("Index", "Movie", FormMethod.Get))
-    {
 
 
-        <div class="form-group">
-            <div class="col-md-offset-0 col-md-5">
-                Genre: @Html.DropDownList("Genre", "All")
-                Title: @Html.TextBox("SearchString")
-                <input type="submit" value="Search" />
-
-            </div>
-
-
-        </div>
-
-    }
 
 
 </p>

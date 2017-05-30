@@ -41,7 +41,7 @@ namespace MVCMovieManager.Models
         public string Status { get; set; }
 
         
-        public Nullable<int> GenreId { get; set; }
+        public Nullable<int> GenreID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cast> Casts { get; set; }

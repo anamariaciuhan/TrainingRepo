@@ -1,0 +1,26 @@
+﻿@model MVCMovieManager.ViewModels.FilterViewModel
+
+
+@using (Html.BeginForm("Search_Partial", "Search", FormMethod.Post))
+    {
+
+
+        <div class="form-container ">
+           
+
+                @Html.LabelFor(m => m.SearchString)
+                @Html.EditorFor(model => model.SearchString )
+
+                @Html.LabelFor(m => m.SelectedGenre)
+                @Html.DropDownListFor( model => model.SelectedGenre, Model.GenreTypes )
+
+               
+       <input type="submit" value="Search" />
+
+            
+
+        </div>
+
+    }
+
+

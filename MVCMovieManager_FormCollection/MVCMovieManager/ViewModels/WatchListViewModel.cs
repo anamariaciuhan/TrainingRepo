@@ -32,4 +32,9 @@ namespace MVCMovieManager.ViewModels
         public string Genre { get;  set; }
         public int WatchListId { get; internal set; }
     }
+
+
+
+
+
 }

@@ -26,7 +26,7 @@
     </Key>
     <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="GenreType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Movies" Relationship="Self.FK__Movie__GenreId__3F9B6DFF" FromRole="Genre" ToRole="Movie" />
+    <NavigationProperty Name="Movies" Relationship="Self.FK__Movie__GenreID__3F9B6DFF" FromRole="Genre" ToRole="Movie" />
   </EntityType>
   <EntityType Name="Login">
     <Key>
@@ -48,9 +48,9 @@
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Seasons" Type="Int32" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="GenreId" Type="Int32" />
+    <Property Name="GenreID" Type="Int32" />
     <NavigationProperty Name="Casts" Relationship="Self.FK__Cast__MovieId__4924D839" FromRole="Movie" ToRole="Cast" />
-    <NavigationProperty Name="Genre" Relationship="Self.FK__Movie__GenreId__3F9B6DFF" FromRole="Movie" ToRole="Genre" />
+    <NavigationProperty Name="Genre" Relationship="Self.FK__Movie__GenreID__3F9B6DFF" FromRole="Movie" ToRole="Genre" />
     <NavigationProperty Name="Watcheds" Relationship="Self.FK__Watched__MovieId__4277DAAA" FromRole="Movie" ToRole="Watched" />
     <NavigationProperty Name="WatchLists" Relationship="Self.FK__WatchList__Movie__45544755" FromRole="Movie" ToRole="WatchList" />
   </EntityType>
@@ -99,7 +99,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Movie__GenreId__3F9B6DFF">
+  <Association Name="FK__Movie__GenreID__3F9B6DFF">
     <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
@@ -109,7 +109,7 @@
         <PropertyRef Name="GenreID" />
       </Principal>
       <Dependent Role="Movie">
-        <PropertyRef Name="GenreId" />
+        <PropertyRef Name="GenreID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -153,7 +153,7 @@
       <End Role="Movie" EntitySet="Movies" />
       <End Role="Cast" EntitySet="Casts" />
     </AssociationSet>
-    <AssociationSet Name="FK__Movie__GenreId__3F9B6DFF" Association="Self.FK__Movie__GenreId__3F9B6DFF">
+    <AssociationSet Name="FK__Movie__GenreID__3F9B6DFF" Association="Self.FK__Movie__GenreID__3F9B6DFF">
       <End Role="Genre" EntitySet="Genres" />
       <End Role="Movie" EntitySet="Movies" />
     </AssociationSet>
